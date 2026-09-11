@@ -1,0 +1,28 @@
+syntax = "proto3";
+package file;
+
+service FileService {
+  rpc UploadFile (UploadFileRequest) returns (FileResponse);
+  rpc GetFile (GetFileRequest) returns (FileResponse);
+}
+
+message FileMeta {
+  string id = 1;
+  string originalName = 2;
+  string mimeType = 3;
+  int64 size = 4;
+  string storagePath = 5;
+  string uploadedBy = 6;
+  string createdAt = 7;
+}
+
+message UploadFileRequest {
+  string originalName = 1;
+  string mimeType = 2;
+  bytes content = 3;
+  string uploadedBy = 4;
+}
+
+message GetFileRequest { string id = 1; }
+
+message FileResponse { FileMeta file = 1; }

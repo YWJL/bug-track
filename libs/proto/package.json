@@ -1,0 +1,14 @@
+{
+  "name": "@bug-track/proto",
+  "version": "1.0.0",
+  "private": true,
+  "description": "共享 gRPC .proto 契约文件，并导出其绝对路径供 protoPath 使用",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "bug.proto",
+    "file.proto"
+  ]
+}

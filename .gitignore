@@ -1,0 +1,19 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# 运行时产生的数据（txt 持久化）
+data/
+
+# 环境变量（.env.example 需要提交）
+.env
+.env.local
+
+# 日志
+*.log
+logs/
+
+# 编辑器
+.idea/
+.vscode/
+.DS_Store

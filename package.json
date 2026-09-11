@@ -1,0 +1,26 @@
+{
+  "name": "bug-track",
+  "version": "1.0.0",
+  "private": true,
+  "description": "简化版禅道 Bug 管理系统 - NestJS + gRPC 微服务后端框架（txt 文件持久化）",
+  "scripts": {
+    "build:common": "pnpm --filter @bug-track/common build",
+    "build": "pnpm -r build",
+    "start:bug": "pnpm build:common && pnpm --filter @bug-track/bug-service start:dev",
+    "start:file": "pnpm build:common && pnpm --filter @bug-track/file-service start:dev",
+    "start:bug:prod": "pnpm build && pnpm --filter @bug-track/bug-service start:prod",
+    "start:file:prod": "pnpm build && pnpm --filter @bug-track/file-service start:prod",
+    "dev": "pnpm build:common && concurrently -n file,bug -c green,cyan \"pnpm --filter @bug-track/file-service start:dev\" \"pnpm --filter @bug-track/bug-service start:dev\"",
+    "clean": "rimraf \"apps/*/dist\" \"libs/common/dist\" data"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@types/node": "^22.10.2",
+    "concurrently": "^9.1.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}
