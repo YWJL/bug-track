@@ -1,3 +1,22 @@
 packages:
   - 'apps/*'
   - 'libs/*'
+
+# pnpm 12 默认开启 minimumReleaseAge: 1440（24 小时）供应链保护：
+# 拒绝安装发布不足 24 小时的包，防止刚被投毒的版本进入本地。
+#
+# 下面这三个是 browserslist 的子依赖（纯浏览器兼容数据包，几乎每天发版），
+# 落在冷却窗口内就会让 `pnpm install` 直接失败：
+#   ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION
+# 它们不执行安装脚本、也不参与运行时代码，按名字长期豁免。
+# 若要收紧策略，删掉这段即可（代价是每次 browserslist 链更新后可能要等 24 小时）。
+# protobufjs 的 postinstall 只做一件事：读自己和下游的 package.json，
+# 版本号前缀不是 '~' 就往 stderr 打一行 warning。不生成代码、不写文件，
+# 所以直接禁用，减少一个执行任意脚本的入口。
+allowBuilds:
+  protobufjs: false
+
+minimumReleaseAgeExclude:
+  - baseline-browser-mapping
+  - electron-to-chromium
+  - update-browserslist-db

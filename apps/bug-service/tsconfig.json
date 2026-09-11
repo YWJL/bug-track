@@ -3,8 +3,11 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "baseUrl": "./",
-    "tsBuildInfoFile": "./dist/.tsbuildinfo"
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+
+    /* 显式声明全局类型包：multer 只通过 Express.Multer.File 全局命名空间使用，
+       没有对应运行时包也没有被 import，TS 7 不会自动包含，必须显式列出 */
+    "types": ["node", "multer"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
